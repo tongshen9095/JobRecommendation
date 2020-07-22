@@ -16,6 +16,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- set Java version -->
 		<javaVersion>11</javaVersion>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -28,6 +29,7 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- add tomcat dependency -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-catalina</artifactId>
