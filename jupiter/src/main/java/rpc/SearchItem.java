@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+// import JSONArray
+import org.json.JSONArray;
 // import JSONObject
 import org.json.JSONObject;
 
@@ -31,13 +33,13 @@ public class SearchItem extends HttpServlet {
 		// return JSON format data as response
 		// tell the front-end the content type
 		response.setContentType("application/json");
-		// create an JSONObject and add key-value pairs
-		JSONObject obj = new JSONObject();
-		obj.put("username", "abcd");
-		obj.put("age", "26");
+		// use JSONArray to return multiple users
+		JSONArray array = new JSONArray();
+		array.put(new JSONObject().put("username", "abcd"));
+		array.put(new JSONObject().put("username", "1234"));
 		// return the JSONObject as the result to the front-end
 		PrintWriter writer = response.getWriter();
-		writer.print(obj);
+		writer.print(array);
 	}
 
 	/**
