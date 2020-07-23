@@ -1,6 +1,5 @@
 package rpc;
 
-import java.io.PrintWriter;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

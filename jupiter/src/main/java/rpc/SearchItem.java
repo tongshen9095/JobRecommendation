@@ -2,7 +2,6 @@ package rpc;
 
 import java.io.IOException;
 // import PrintWriter
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,15 +29,12 @@ public class SearchItem extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// tell the front-end the content type
-		response.setContentType("application/json");
-		PrintWriter writer = response.getWriter();
 		// return based on parameter in users' input
 		String username = request.getParameter("username");
 		if (username != null) {
 			JSONObject obj = new JSONObject();
 			obj.put("username", username);
-			writer.print(obj);
+			RpcHelper.writeJsonObject(response, obj);
 		}
 	}
 
