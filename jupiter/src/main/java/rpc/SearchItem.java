@@ -1,13 +1,12 @@
 package rpc;
 
 import java.io.IOException;
-// import PrintWriter
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-// import JSONObject
-import org.json.JSONObject;
+import org.json.JSONArray;
+import external.GitHubClient;
 
 /**
  * Servlet implementation class SearchItem
@@ -29,13 +28,11 @@ public class SearchItem extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// return based on parameter in users' input
-		String username = request.getParameter("username");
-		if (username != null) {
-			JSONObject obj = new JSONObject();
-			obj.put("username", username);
-			RpcHelper.writeJsonObject(response, obj);
-		}
+		double lat = Double.parseDouble(request.getParameter("lat"));
+		double lon = Double.parseDouble(request.getParameter("lon"));
+		GitHubClient client = new GitHubClient();
+		JSONArray array = client.search(lat, lon, null);
+		RpcHelper.writeJsonArray(response, array);
 	}
 
 	/**
