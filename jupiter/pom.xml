@@ -47,7 +47,7 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.10</version>
 		</dependency>
-		<!-- add Lombok as a denpendency-->
+		<!-- add Lombok as a dependency-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
