@@ -23,6 +23,7 @@ public class GitHubClient {
 	private static final String URL_TEMPLATE = "https://jobs.github.com/positions.json?description=%s&lat=%s&long=%s";
 	private static final String DEFAULT_KEYWORD = "developer";
 	
+	// use GitHub client to request job info
 	public JSONArray search(double lat, double lon, String keyword) {
 		// corner case: user does not provide keyword, then use the default
 		if (keyword == null) {
