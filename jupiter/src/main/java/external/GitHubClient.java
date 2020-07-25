@@ -3,6 +3,8 @@ package external;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,6 +15,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+import entity.Item;
 
 public class GitHubClient {
 	private static final String URL_TEMPLATE = "https://jobs.github.com/positions.json?description=%s&lat=%s&long=%s";
@@ -77,5 +82,26 @@ public class GitHubClient {
 	        e.printStackTrace();
 	    }
 	    return new JSONArray();
+	}
+	
+	// filter the data
+	private List<Item> getItemList(JSONArray array) {
+		List<Item> itemList = new ArrayList<>();
+		for (int i = 0; i < array.length(); i++) {
+			JSONObject object = array.getJSONObject(i);
+			Item item = Item.builder()
+					        .itemId(getStringFieldOrEmpty(object, "id"))
+					        .name(getStringFieldOrEmpty(object, "title"))
+					        .address(getStringFieldOrEmpty(object, "location"))
+					        .url(getStringFieldOrEmpty(object, "url"))
+					        .imageUrl(getStringFieldOrEmpty(object, "company_logo"))
+					        .build();
+			itemList.add(item);
+		}
+		return itemList;	
+	}
+	
+	private String getStringFieldOrEmpty(JSONObject obj, String field) {
+		return obj.isNull(field) ? "" : obj.getString(field);
 	}
 }
