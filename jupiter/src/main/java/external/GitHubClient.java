@@ -79,7 +79,7 @@ public class GitHubClient {
 	}
 	
 	// helper function to filter the data
-	private static List<Item> getItemList(JSONArray array) {
+	private List<Item> getItemList(JSONArray array) {
 		List<Item> itemList = new ArrayList<>();
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject object = array.getJSONObject(i);
@@ -95,7 +95,7 @@ public class GitHubClient {
 		return itemList;	
 	}
 	
-	private static String getStringFieldOrEmpty(JSONObject obj, String field) {
+	private String getStringFieldOrEmpty(JSONObject obj, String field) {
 		// field does not exist or field is null return null
 		return !obj.has(field) || obj.isNull(field) ? "" : obj.getString(field);
 	}
