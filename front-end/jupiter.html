@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>   
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Job Recommendation">
+    <meta name="author" content="Tong Shen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./jupiter.css">
+    <title>Job Recommendation</title>
+</head>
+
+<body>
+    <!-- header -->
+    <header class="top-headeer">
+        <nav class="top-mav">
+            <a href="#">Home</a>
+            <a href="#">Contact</a>
+            <a href="#">About</a>
+        </nav>
+        <span id="welcome-msg"></span>
+        <i id="avatar" class="avatar fa fa-user fa-2x"></i>
+    </header>
+
+    <!--  main content -->
+    <div>
+        <!-- header -->
+        <header>
+            <p>
+                <span>Job</span>
+                <br/> Recommendtion
+            </p>
+        </header>
+
+        <!-- main section -->
+        <section class="main-section">
+            <!-- left navigation bar -->
+            <aside id="item-nav">
+                <div class="nav-icon">
+                    <i class="fa fa-sitemap fa-2x"></i>
+                </div>
+                <nav class="main-nav">
+                    <a herf="#" id="nearby-btm" class="main-nav-bin active">
+                        <i class="fa fa-map-marker"></i> NearBy
+                    </a>
+                    <a herf="#" id="fav-btn" class="main-nav-bin"> 
+                        <i class="fa fa-heart"></i> My Favorites
+                    </a>
+                    <a herf="#" id="recommend-bt" class="main-nav-bin">
+                        <i class="fa fa-thumbs-up"></i> Recommendation
+                    </a>
+                </nav>
+            </aside>
+            <!-- job list-->
+            <ul id="item-list">
+                <li class="item">
+                    <img alt="job image" src="https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcVZXIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c2771689af44c596d7935ae1de19a193ac678333/f470d99d-33e6-44f5-ac37-d1237f0a00d1" />
+                    <div>
+                        <a class="item-name" herf="#">Job</a>
+                        <p class="item-category">Senior Software Engineer</p>
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="item-address">699 Calderon Ave<br/>Mountain View<br/>CA</p>
+                    <div class="fav-link">
+                        <i class="fa fa-heart"></i>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <p class="title">What We Do</p>
+        <p>"Help You Find the Best Job Around"</p>
+        <ul>
+            <li>
+                <p><i class="fa fa-map-o fa-2x"></i></p>
+                <p>JobOffer Office, CA</p>
+            </li>
+            <li>
+                <p><i class="fa fa-envelope fa-2x"></i></p>
+                <p>customer-service@joboffer.com</p>
+            </li>
+            <li>
+                <p><i class="fa fa-phone fa-2x"></i></p>
+                <p>+1 212 216 118</p>
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>
