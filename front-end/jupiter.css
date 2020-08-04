@@ -54,3 +54,9 @@ ul {
     border-right: 1px solid #FFFFFF;
     padding-right: 10px;
 }
+
+.container {
+    margin: 60px auto;
+    max-width: 1000px;
+    min-width: 600px;
+}
