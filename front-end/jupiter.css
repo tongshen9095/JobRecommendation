@@ -18,7 +18,7 @@ ul {
 
 .top-header {
     align-items: center;
-    background: #DF574B;
+    background: #FFC0CB;
     box-shadow: 0px 2px 10px #333333;
     display: flex;
     height: 60px;
@@ -60,3 +60,24 @@ ul {
     max-width: 1000px;
     min-width: 600px;
 }
+
+.container>header {
+    background: url('./pic/work.jpg') no-repeat 55% 55%;
+    background-size: 100%;
+    display: flex;
+    align-items: center;
+    height: 250px;
+}
+
+.container>header p {
+    border-left: 1px solid #FFFFFF;
+    font-weight: 400;
+    font-size: 2em;
+    line-height: 1em;
+    margin-left: 220px;
+    padding-left: 5px;
+  }
+
+  .container>header span {
+    color: #6495ED;
+  }
