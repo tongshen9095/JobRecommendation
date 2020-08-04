@@ -78,6 +78,45 @@ ul {
     padding-left: 5px;
   }
 
-  .container>header span {
+.container>header span {
     color: #6495ED;
+}
+
+.main-section {
+    background: #F3BB43;
+}
+
+#item-nav {
+    float: left;
+    width: 180px;
+}
+
+.nav-icon {
+    color: #624630;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-nav-btn {
+    background: none;
+    border-top: 1px solid #FFFFFF;
+    color: #FFFFFF;;
+    display: block;
+    padding: 20px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.main-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #624630;
   }
+  
+  .main-nav-btn.active {
+    background: #F2EBD9;
+    color: #624630;
+  }
+  
+  .main-nav-btn i {
+    width: 20px;
+}
