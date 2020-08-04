@@ -49,3 +49,8 @@ ul {
     margin-left: 20px;
     text-decoration: none;
 }
+
+#welcome-msg {
+    border-right: 1px solid #FFFFFF;
+    padding-right: 10px;
+}
