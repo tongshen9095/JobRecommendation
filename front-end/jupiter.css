@@ -1,3 +1,4 @@
+/* general */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -16,6 +17,7 @@ ul {
     list-style: none;
 }
 
+/* top header */
 .top-header {
     align-items: center;
     background: #FFC0CB;
@@ -61,6 +63,7 @@ ul {
     min-width: 600px;
 }
 
+/* main header */
 .container>header {
     background: url('./pic/work.jpg') no-repeat 55% 55%;
     background-size: 100%;
@@ -195,3 +198,30 @@ ul {
 .fav-link:hover {
     color: #F13F3F;
 } 
+
+/* footer */
+footer {
+	background: #434343;
+	font-size: 0.8em;
+	height: 200px;
+	position: relative;
+}
+
+footer p {
+	text-align: center;
+}
+
+footer p.title {
+	font-size: 1.2em;
+	padding: 15px;
+}
+
+footer ul {
+	align-items: center;
+	display: flex;
+	padding: 20px;
+}
+
+footer ul li {
+	flex-grow: 1;
+}
