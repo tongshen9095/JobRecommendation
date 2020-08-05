@@ -11,9 +11,10 @@ public class MonkeyLearnClient {
 	
 	/**
 	 * MonkeyLearn output:
-	 * {{"keyword": "elon musk", "keyword": "tesla", "keyword": "rocket"},
-	 *  {"keyword": "facebook", "keyword": "mark", "keyword": "social network"},
-	 *  {"keyword": "google", "keyword": "brain", "keyword": "machine learning"}}
+	 * [
+	 *  [{"keyword": "elon musk"}, {"keyword": "tesla"}, {"keyword": "rocket"}],
+	 *  [{"keyword": "facebook"}, {"keyword": "mark"}, {"keyword": "social network"}],
+	 *  [{"keyword": "google"}, {"keyword": "brain"}, {"keyword": "machine learning"}]
 	 */
 	
 	private static List<List<String>> getKeywords(JSONArray mlResultArray) {
