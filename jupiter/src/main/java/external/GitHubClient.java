@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -77,11 +78,30 @@ public class GitHubClient {
 	// helper function to filter the data
 	private List<Item> getItemList(JSONArray array) {
 		List<Item> itemList = new ArrayList<>();
+		
+		// extract keywords
+		List<String> descriptionList = new ArrayList<>();
+		for (int i = 0; i < array.length(); i++) {
+			String description = getStringFieldOrEmpty(array.getJSONObject(i), "description");
+			if (description.equals("") || description.equals("\n")) {
+				String title =  getStringFieldOrEmpty(array.getJSONObject(i), "title");
+				descriptionList.add(title);
+			}
+			else {
+				descriptionList.add(description);
+			}
+		}
+		String[] text = descriptionList.toArray(new String[descriptionList.size()]);
+		List<List<String>> keywords = MonkeyLearnClient.extractKeywords(text);
+		
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject object = array.getJSONObject(i);
 			Item item = Item.builder().itemId(getStringFieldOrEmpty(object, "id"))
-					.name(getStringFieldOrEmpty(object, "title")).address(getStringFieldOrEmpty(object, "location"))
-					.url(getStringFieldOrEmpty(object, "url")).imageUrl(getStringFieldOrEmpty(object, "company_logo"))
+					.name(getStringFieldOrEmpty(object, "title"))
+					.address(getStringFieldOrEmpty(object, "location"))
+					.url(getStringFieldOrEmpty(object, "url"))
+					.imageUrl(getStringFieldOrEmpty(object, "company_logo"))
+					.keywords(new HashSet<String>(keywords.get(i)))
 					.build();
 			itemList.add(item);
 		}
