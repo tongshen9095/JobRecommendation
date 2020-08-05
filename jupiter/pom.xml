@@ -47,12 +47,25 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.10</version>
 		</dependency>
-		<!-- add Lombok as a dependency-->
+		<!-- add Lombok as a dependency -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.12</version>
 			<scope>provided</scope>
+		</dependency>
+		<!-- add monkey learn as a dependency -->
+		<dependency>
+			<groupId>com.monkeylearn</groupId>
+			<artifactId>monkeylearn-java</artifactId>
+			<version>0.1.5</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- add json simple as a dependency -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
 

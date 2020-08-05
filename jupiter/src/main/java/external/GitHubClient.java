@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -75,20 +76,41 @@ public class GitHubClient {
 	}
 
 	// helper function to filter the data
-	private List<Item> getItemList(JSONArray array) {
+	private static List<Item> getItemList(JSONArray array) {
 		List<Item> itemList = new ArrayList<>();
+		List<List<String>> keywords = getKeywords(array);
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject object = array.getJSONObject(i);
 			Item item = Item.builder().itemId(getStringFieldOrEmpty(object, "id"))
-					.name(getStringFieldOrEmpty(object, "title")).address(getStringFieldOrEmpty(object, "location"))
-					.url(getStringFieldOrEmpty(object, "url")).imageUrl(getStringFieldOrEmpty(object, "company_logo"))
+					.name(getStringFieldOrEmpty(object, "title"))
+					.address(getStringFieldOrEmpty(object, "location"))
+					.url(getStringFieldOrEmpty(object, "url"))
+					.imageUrl(getStringFieldOrEmpty(object, "company_logo"))
+					.keywords(new HashSet<String>(keywords.get(i)))
 					.build();
 			itemList.add(item);
 		}
 		return itemList;
 	}
+	
+	private static List<List<String>> getKeywords(JSONArray array) {
+		List<String> descriptionList = new ArrayList<>();
+		for (int i = 0; i < array.length(); i++) {
+			String description = getStringFieldOrEmpty(array.getJSONObject(i), "description");
+			if (description.equals("") || description.equals("\n")) {
+				String title =  getStringFieldOrEmpty(array.getJSONObject(i), "title");
+				descriptionList.add(title);
+			}
+			else {
+				descriptionList.add(description);
+			}
+		}
+		String[] text = descriptionList.toArray(new String[descriptionList.size()]);
+		List<List<String>> keywords = MonkeyLearnClient.extractKeywords(text);
+		return keywords;
+	}
 
-	private String getStringFieldOrEmpty(JSONObject obj, String field) {
+	private static String getStringFieldOrEmpty(JSONObject obj, String field) {
 		// field does not exist or field is null return null
 		return !obj.has(field) || obj.isNull(field) ? "" : obj.getString(field);
 	}
