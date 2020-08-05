@@ -76,24 +76,9 @@ public class GitHubClient {
 	}
 
 	// helper function to filter the data
-	private List<Item> getItemList(JSONArray array) {
+	private static List<Item> getItemList(JSONArray array) {
 		List<Item> itemList = new ArrayList<>();
-		
-		// extract keywords
-		List<String> descriptionList = new ArrayList<>();
-		for (int i = 0; i < array.length(); i++) {
-			String description = getStringFieldOrEmpty(array.getJSONObject(i), "description");
-			if (description.equals("") || description.equals("\n")) {
-				String title =  getStringFieldOrEmpty(array.getJSONObject(i), "title");
-				descriptionList.add(title);
-			}
-			else {
-				descriptionList.add(description);
-			}
-		}
-		String[] text = descriptionList.toArray(new String[descriptionList.size()]);
-		List<List<String>> keywords = MonkeyLearnClient.extractKeywords(text);
-		
+		List<List<String>> keywords = extractKeywords(array);
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject object = array.getJSONObject(i);
 			Item item = Item.builder().itemId(getStringFieldOrEmpty(object, "id"))
@@ -107,8 +92,25 @@ public class GitHubClient {
 		}
 		return itemList;
 	}
+	
+	private static List<List<String>> extractKeywords(JSONArray array) {
+		List<String> descriptionList = new ArrayList<>();
+		for (int i = 0; i < array.length(); i++) {
+			String description = getStringFieldOrEmpty(array.getJSONObject(i), "description");
+			if (description.equals("") || description.equals("\n")) {
+				String title =  getStringFieldOrEmpty(array.getJSONObject(i), "title");
+				descriptionList.add(title);
+			}
+			else {
+				descriptionList.add(description);
+			}
+		}
+		String[] text = descriptionList.toArray(new String[descriptionList.size()]);
+		List<List<String>> keywords = MonkeyLearnClient.extractKeywords(text);
+		return keywords;
+	}
 
-	private String getStringFieldOrEmpty(JSONObject obj, String field) {
+	private static String getStringFieldOrEmpty(JSONObject obj, String field) {
 		// field does not exist or field is null return null
 		return !obj.has(field) || obj.isNull(field) ? "" : obj.getString(field);
 	}
