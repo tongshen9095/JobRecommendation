@@ -78,7 +78,7 @@ public class GitHubClient {
 	// helper function to filter the data
 	private static List<Item> getItemList(JSONArray array) {
 		List<Item> itemList = new ArrayList<>();
-		List<List<String>> keywords = extractKeywords(array);
+		List<List<String>> keywords = getKeywords(array);
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject object = array.getJSONObject(i);
 			Item item = Item.builder().itemId(getStringFieldOrEmpty(object, "id"))
@@ -93,7 +93,7 @@ public class GitHubClient {
 		return itemList;
 	}
 	
-	private static List<List<String>> extractKeywords(JSONArray array) {
+	private static List<List<String>> getKeywords(JSONArray array) {
 		List<String> descriptionList = new ArrayList<>();
 		for (int i = 0; i < array.length(); i++) {
 			String description = getStringFieldOrEmpty(array.getJSONObject(i), "description");
