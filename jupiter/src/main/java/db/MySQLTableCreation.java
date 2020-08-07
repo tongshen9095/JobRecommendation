@@ -61,8 +61,11 @@ public class MySQLTableCreation {
 					+ "FOREIGN KEY (item_id) REFERENCES items(item_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
+			//step4: insert a fake user for test
+			// user_id, password, first_name, last_name
+			sql = "INSERT INTO users VALUES('1111', '3229c1097c00d497a0fd282d586be050', 'John', 'Smith')";
+			stmt.executeUpdate(sql);
             
-            //
             conn.close();
             System.out.println("Import done successfully");
 		}
