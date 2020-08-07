@@ -8,7 +8,7 @@ public class MySQLTableCreation {
 	public static void main(String[] args) {
 		try {
 			// step1: connect to MySQL
-			System.out.println("Connecting to" + MySQLDBUtil.URL);
+			System.out.println("Connecting to " + MySQLDBUtil.URL);
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(MySQLDBUtil.URL);
             if (conn == null) {
@@ -55,8 +55,8 @@ public class MySQLTableCreation {
 			sql = "CREATE TABLE history ("
 					+ "user_id VARCHAR(255) NOT NULL,"
 					+ "item_id VARCHAR(255) NOT NULL,"
-					+ "last favor_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
-					+ "FOREIGN KEY (user_id, item_id),"
+					+ "last_favor_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
+					+ "PRIMARY KEY (user_id, item_id),"
 					+ "FOREIGN KEY (user_id) REFERENCES users(user_id),"
 					+ "FOREIGN KEY (item_id) REFERENCES items(item_id)"
 					+ ")";
