@@ -63,6 +63,7 @@ public class MySQLTableCreation {
 			stmt.executeUpdate(sql);
 			//step4: insert a fake user for test
 			// user_id, password, first_name, last_name
+			// the password is encrypted
 			sql = "INSERT INTO users VALUES('1111', '3229c1097c00d497a0fd282d586be050', 'John', 'Smith')";
 			stmt.executeUpdate(sql);
             
