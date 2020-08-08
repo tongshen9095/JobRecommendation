@@ -51,6 +51,23 @@ public class MySQLConnection {
 		}
 	}
 	
+	public void unsetFavoriteItems(String userId, String itemId) {
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return;
+		}
+		String sql = "DELETE FROM history WHERE user_id = ? AND item_id = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
+			stmt.setNString(2, itemId);
+			stmt.executeUpdate();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void saveItem(Item item) {
 		
 	}
