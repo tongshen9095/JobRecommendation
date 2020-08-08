@@ -50,7 +50,13 @@ public class ItemHistory extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		MySQLConnection conn = new MySQLConnection();
+		JSONObject input = new JSONObject(IOUtils.toString(request.getReader()));
+		String userId = input.getString("user_id");
+		String itemId = input.getJSONObject("favorite").getString("item_id");
+		conn.unsetFavoriteItems(userId, itemId);
+		conn.close();
+		RpcHelper.writeJsonObject(response, new JSONObject().put("result", "success"));
 	}
 
 }
