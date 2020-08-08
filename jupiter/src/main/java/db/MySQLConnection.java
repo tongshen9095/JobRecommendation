@@ -39,8 +39,8 @@ public class MySQLConnection {
 			return;
 		}
 		saveItem(item);
-		String sql = "INSERT IGNORE INTO history (user_id, item_id) VALUES(?, ?)";
 		try {
+			String sql = "INSERT IGNORE INTO history (user_id, item_id) VALUES(?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			stmt.setNString(2, item.getItemId());
@@ -56,8 +56,8 @@ public class MySQLConnection {
 			System.err.println("DB connection failed");
 			return;
 		}
-		String sql = "DELETE FROM history WHERE user_id = ? AND item_id = ?";
 		try {
+			String sql = "DELETE FROM history WHERE user_id = ? AND item_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			stmt.setNString(2, itemId);
@@ -73,9 +73,9 @@ public class MySQLConnection {
 			System.err.println("DB connection failed");
 			return;
 		}
-		String sql = "INSERT IGNORE INTO items VALUES (? ,?, ?, ?, ?)";
 		try {
 			// save items to items table
+			String sql = "INSERT IGNORE INTO items VALUES (? ,?, ?, ?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setNString(1, item.getItemId());
 			stmt.setNString(2, item.getName());
@@ -95,7 +95,23 @@ public class MySQLConnection {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Set<String> getFavoriteItemIds(String userId) {
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return new HashSet<>();
+		}
 		
+		Set<String> favItemIds = new HashSet<>();
+		try {
+			String sql = "SELECT item_id FROM history WHERE user_id = ?";
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return favItemIds;
 	}
 
 }
