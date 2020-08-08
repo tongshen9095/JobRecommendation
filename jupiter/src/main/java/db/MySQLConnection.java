@@ -43,7 +43,7 @@ public class MySQLConnection {
 			String sql = "INSERT IGNORE INTO history (user_id, item_id) VALUES(?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
-			stmt.setNString(2, item.getItemId());
+			stmt.setString(2, item.getItemId());
 			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
@@ -60,7 +60,7 @@ public class MySQLConnection {
 			String sql = "DELETE FROM history WHERE user_id = ? AND item_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
-			stmt.setNString(2, itemId);
+			stmt.setString(2, itemId);
 			stmt.executeUpdate();
 		}
 		catch (SQLException e) {
@@ -77,18 +77,18 @@ public class MySQLConnection {
 			// save items to items table
 			String sql = "INSERT IGNORE INTO items VALUES (? ,?, ?, ?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setNString(1, item.getItemId());
-			stmt.setNString(2, item.getName());
-			stmt.setNString(3, item.getAddress());
-			stmt.setNString(4, item.getImageUrl());
-			stmt.setNString(5, item.getUrl());
+			stmt.setString(1, item.getItemId());
+			stmt.setString(2, item.getName());
+			stmt.setString(3, item.getAddress());
+			stmt.setString(4, item.getImageUrl());
+			stmt.setString(5, item.getUrl());
 			stmt.executeUpdate();
 			// save keywords to keywords table
 			sql = "INSERT IGNORE INTO keywords VALUES (?, ?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setNString(1, item.getItemId());
+			stmt.setString(1, item.getItemId());
 			for (String keyword : item.getKeywords()) {
-				stmt.setNString(2, keyword);
+				stmt.setString(2, keyword);
 				stmt.executeUpdate();
 			}
 		}
@@ -106,6 +106,8 @@ public class MySQLConnection {
 		Set<String> favItemIds = new HashSet<>();
 		try {
 			String sql = "SELECT item_id FROM history WHERE user_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
 			
 		}
 		catch (SQLException e) {
