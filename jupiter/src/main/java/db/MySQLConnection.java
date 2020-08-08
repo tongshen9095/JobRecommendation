@@ -73,9 +73,9 @@ public class MySQLConnection {
 			System.err.println("DB connection failed");
 			return;
 		}
+		String sql = "INSERT IGNORE INTO items VALUES (? ,?, ?, ?, ?)";
 		try {
 			// save items to items table
-			String sql = "INSERT IGNORE INTO items VALUES (? ,?, ?, ?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setNString(1, item.getItemId());
 			stmt.setNString(2, item.getName());
