@@ -5,6 +5,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
+import db.MySQLConnection;
+import entity.Item;
+
 
 /**
  * Servlet implementation class ItemHistory
@@ -32,8 +37,13 @@ public class ItemHistory extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		MySQLConnection conn = new MySQLConnection();
+		JSONObject input = new JSONObject(IOUtils.toString(request.getReader()));
+		String userId = input.getString("user_id");
+		Item item = RpcHelper.parseFavoriteItem(input.getJSONObject("favorite"));
+		conn.setFavoriteItems(userId, item);
+		conn.close();
+		RpcHelper.writeJsonObject(response, new JSONObject().put("result", "success"));
 	}
 
 	/**
