@@ -69,6 +69,32 @@ public class MySQLConnection {
 	}
 	
 	public void saveItem(Item item) {
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return;
+		}
+		try {
+			// save items to items table
+			String sql = "INSERT IGNORE INTO items VALUES (? ,?, ?, ?, ?)";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setNString(1, item.getItemId());
+			stmt.setNString(2, item.getName());
+			stmt.setNString(3, item.getAddress());
+			stmt.setNString(4, item.getImageUrl());
+			stmt.setNString(5, item.getUrl());
+			stmt.executeUpdate();
+			// save keywords to keywords table
+			sql = "INSERT IGNORE INTO keywords VALUES (?, ?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setNString(1, item.getItemId());
+			for (String keyword : item.getKeywords()) {
+				stmt.setNString(2, keyword);
+				stmt.executeUpdate();
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
