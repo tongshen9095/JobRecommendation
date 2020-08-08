@@ -93,6 +93,7 @@ public class GitHubClient {
 		return itemList;
 	}
 	
+	// helper function to get keywords with monkeylearnclient
 	private static List<List<String>> getKeywords(JSONArray array) {
 		List<String> descriptionList = new ArrayList<>();
 		for (int i = 0; i < array.length(); i++) {
