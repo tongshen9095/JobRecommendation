@@ -108,12 +108,38 @@ public class MySQLConnection {
 			String sql = "SELECT item_id FROM history WHERE user_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
-			
+			ResultSet res = stmt.executeQuery();
+			while (res.next()) {
+				String itemId = res.getString("item_id");
+				favItemIds.add(itemId);
+			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return favItemIds;
+	}
+	
+	public Set<String> getKeywords(String itemId) {
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return new HashSet<>();
+		}
+		Set<String> keywords = new HashSet<>();
+		try {
+			String sql = "SELECT keyword FROM keywords WHERE item_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, itemId);
+			ResultSet res = stmt.executeQuery();
+			while (res.next()) {
+				String keyword = res.getString("keyword");
+				keywords.add(keyword);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return keywords;
 	}
 
 }
