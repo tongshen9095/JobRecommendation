@@ -51,6 +51,8 @@ public class MonkeyLearnClient {
 	}
 
 	/**
+	 * Convert JSONArray to List<List<String>>
+	 * 
 	 * MonkeyLearn output: 
 	 * [ 
 	 *  [{"keyword": "elon musk"}, {"keyword": "tesla"}, {"keyword": "rocket"}], 
