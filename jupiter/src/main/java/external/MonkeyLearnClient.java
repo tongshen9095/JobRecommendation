@@ -65,7 +65,6 @@ public class MonkeyLearnClient {
 	 *  ["google", "brain", "machine learning"]
 	 * ]
 	 */
-
 	private static List<List<String>> formatKeywords(JSONArray mlResultArray) {
 		List<List<String>> topKeywords = new ArrayList<>();
 		for (int i = 0; i < mlResultArray.size(); i++) {
