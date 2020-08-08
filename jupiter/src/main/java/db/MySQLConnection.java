@@ -32,8 +32,27 @@ public class MySQLConnection {
 			}
 		}
 	}
-
 	
-
+	public void setFavoriteItems(String userId, Item item) {
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return;
+		}
+		saveItem(item);
+		String sql = "INSERT IGNORE INTO history (user_id, item_id) VALUES(?, ?)";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
+			stmt.setNString(2, item.getItemId());
+			stmt.executeUpdate();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveItem(Item item) {
+		
+	}
 
 }
