@@ -67,11 +67,17 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<!-- add mysql as dependency -->
+		<!-- add mysql as a dependency -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.18</version>
+		</dependency>
+		<!-- add commons-io as a dependency -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.7</version>
 		</dependency>
 	</dependencies>
 
