@@ -68,7 +68,7 @@ public class MySQLConnection {
 		}
 	}
 	
-	private void saveItem(Item item) {
+	public void saveItem(Item item) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
 			return;
@@ -97,7 +97,7 @@ public class MySQLConnection {
 		}
 	}
 	
-	private Set<String> getFavItemIds(String userId) {
+	public Set<String> getFavItemIds(String userId) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
 			return new HashSet<>();
@@ -120,7 +120,7 @@ public class MySQLConnection {
 		return favItemIds;
 	}
 	
-	private Set<String> getKeywords(String itemId) {
+	public Set<String> getKeywords(String itemId) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
 			return new HashSet<>();
