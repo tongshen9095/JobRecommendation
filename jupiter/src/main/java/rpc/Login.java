@@ -53,7 +53,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONObject input = new JSONObject(IOUtils.toString(request.getReader()));
-		String userId = input.getString("uer_id");
+		String userId = input.getString("user_id");
 		String password = input.getString("password");
 		MySQLConnection conn = new MySQLConnection();
 		JSONObject obj = new JSONObject();
