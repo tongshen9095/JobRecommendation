@@ -2,13 +2,16 @@ package rpc;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
+import db.MySQLConnection;
 import entity.Item;
 import external.GitHubClient;
 
@@ -36,9 +39,15 @@ public class SearchItem extends HttpServlet {
 		double lon = Double.parseDouble(request.getParameter("lon"));
 		GitHubClient client = new GitHubClient();
 		List<Item> items = client.search(lat, lon, null);
+		String userId = request.getParameter("user_id");
+		MySQLConnection conn = new MySQLConnection();
+		Set<String> favItemIds = conn.getFavItemIds(userId);
 		JSONArray array = new JSONArray();
 		for (Item item : items) {
-			array.put(item.toJSONObject());
+			JSONObject obj = item.toJSONObject();
+			// indicate whether the user favoriates the item in the search result
+			obj.put("favorite", favItemIds.contains(item.getItemId()));
+			array.put(obj);
 		}
 		RpcHelper.writeJsonArray(response, array);
 	}

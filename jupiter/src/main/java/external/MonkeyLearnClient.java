@@ -42,7 +42,7 @@ public class MonkeyLearnClient {
 		try {
 			response = ml.extractors.extract(MODEL, text, extraParams);
 			JSONArray resultArray = response.arrayResult;
-			return getKeywords(resultArray);
+			return formatKeywords(resultArray);
 		}
 		catch (MonkeyLearnException e) {
 			e.printStackTrace();	
@@ -51,15 +51,23 @@ public class MonkeyLearnClient {
 	}
 
 	/**
+	 * Convert JSONArray to List<List<String>>
+	 * 
 	 * MonkeyLearn output: 
 	 * [ 
 	 *  [{"keyword": "elon musk"}, {"keyword": "tesla"}, {"keyword": "rocket"}], 
 	 *  [{"keyword": "facebook"}, {"keyword": "mark"}, {"keyword": "social network"}], 
 	 *  [{"keyword": "google"}, {"keyword": "brain"}, {"keyword": "machine learning"}],
 	 * ]
+	 * 
+	 * List<List<String>>
+	 * [
+	 *  ["elon musk", "tesla", "rocket"],
+	 *  ["facebook", "mark", "social network"],
+	 *  ["google", "brain", "machine learning"]
+	 * ]
 	 */
-
-	private static List<List<String>> getKeywords(JSONArray mlResultArray) {
+	private static List<List<String>> formatKeywords(JSONArray mlResultArray) {
 		List<List<String>> topKeywords = new ArrayList<>();
 		for (int i = 0; i < mlResultArray.size(); i++) {
 			List<String> keywordsOut = new ArrayList<>();
