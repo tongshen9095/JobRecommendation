@@ -150,7 +150,7 @@ public class MySQLConnection {
 		Set<Item> favItems = new HashSet<>();
 		Set<String> favItemIds = getFavItemIds(userId);
 		try {
-			String sql = "SELECT * FROM itmes WHERE item_id = ?";
+			String sql = "SELECT * FROM items WHERE item_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			for (String itemId : favItemIds) {
 				stmt.setString(1, itemId);
