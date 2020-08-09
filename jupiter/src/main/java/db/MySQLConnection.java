@@ -97,7 +97,7 @@ public class MySQLConnection {
 		}
 	}
 	
-	public Set<String> getFavoriteItemIds(String userId) {
+	public Set<String> getFavItemIds(String userId) {
 		if (conn == null) {
 			System.err.println("DB connection failed");
 			return new HashSet<>();
@@ -140,6 +140,39 @@ public class MySQLConnection {
 			e.printStackTrace();
 		}
 		return keywords;
+	}
+	
+	public Set<Item> getFavItems(String userId) {
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return new HashSet<>();
+		}
+		Set<Item> favItems = new HashSet<>();
+		Set<String> favItemIds = getFavItemIds(userId);
+		try {
+			String sql = "SELECT * FROM itmes WHERE item_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			for (String itemId : favItemIds) {
+				stmt.setString(1, itemId);
+				ResultSet res = stmt.executeQuery();
+				if (res.next()) {
+					Item item = Item.builder()
+							.itemId(res.getString("item_id"))
+							.name(res.getString("name"))
+							.address(res.getString("address"))
+							.url(res.getString("url"))
+							.imageUrl(res.getString("image_url"))
+							.keywords(getKeywords(itemId))
+							.build();
+					favItems.add(item);
+				}
+			}
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return favItems;
 	}
 
 }
