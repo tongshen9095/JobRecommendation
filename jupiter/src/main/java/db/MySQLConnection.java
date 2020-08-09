@@ -39,8 +39,8 @@ public class MySQLConnection {
 			return;
 		}
 		saveItem(item);
+		String sql = "INSERT IGNORE INTO history (user_id, item_id) VALUES(?, ?)";
 		try {
-			String sql = "INSERT IGNORE INTO history (user_id, item_id) VALUES(?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			stmt.setString(2, item.getItemId());
@@ -56,8 +56,8 @@ public class MySQLConnection {
 			System.err.println("DB connection failed");
 			return;
 		}
+		String sql = "DELETE FROM history WHERE user_id = ? AND item_id = ?";
 		try {
-			String sql = "DELETE FROM history WHERE user_id = ? AND item_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			stmt.setString(2, itemId);
@@ -73,9 +73,9 @@ public class MySQLConnection {
 			System.err.println("DB connection failed");
 			return;
 		}
+		String sql = "INSERT IGNORE INTO items VALUES (? ,?, ?, ?, ?)";
 		try {
 			// save items to items table
-			String sql = "INSERT IGNORE INTO items VALUES (? ,?, ?, ?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, item.getItemId());
 			stmt.setString(2, item.getName());
@@ -104,8 +104,8 @@ public class MySQLConnection {
 		}
 		
 		Set<String> favItemIds = new HashSet<>();
+		String sql = "SELECT item_id FROM history WHERE user_id = ?";
 		try {
-			String sql = "SELECT item_id FROM history WHERE user_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			ResultSet res = stmt.executeQuery();
@@ -126,8 +126,8 @@ public class MySQLConnection {
 			return new HashSet<>();
 		}
 		Set<String> keywords = new HashSet<>();
+		String sql = "SELECT keyword FROM keywords WHERE item_id = ?";
 		try {
-			String sql = "SELECT keyword FROM keywords WHERE item_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, itemId);
 			ResultSet res = stmt.executeQuery();
@@ -149,8 +149,8 @@ public class MySQLConnection {
 		}
 		Set<Item> favItems = new HashSet<>();
 		Set<String> favItemIds = getFavItemIds(userId);
+		String sql = "SELECT * FROM items WHERE item_id = ?";
 		try {
-			String sql = "SELECT * FROM items WHERE item_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			for (String itemId : favItemIds) {
 				stmt.setString(1, itemId);
