@@ -174,5 +174,27 @@ public class MySQLConnection {
 		}
 		return favItems;
 	}
+	
+	public String getFullname(String userId) {
+		if (conn == null) {
+			System.err.println("DB connection failed");
+			return "";
+		}
+		String name = "";
+		String sql = "SELECT first_name, last_name FROM users WHERE user_id = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
+			ResultSet res = stmt.executeQuery();
+			if (res.next()) {
+				name = res.getString("first_name") + " " + res.getString("last_name");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return name;
+		}
+		
 
 }
