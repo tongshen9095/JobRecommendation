@@ -5,6 +5,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -28,20 +30,15 @@ public class RecommendItem extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		JSONObject obj1 = new JSONObject();
-		obj1.put("name", "abcd");
-		obj1.put("address", "san francisco");
-		obj1.put("time", "01/01/2017");
-
-		JSONObject obj2 = new JSONObject();
-		obj2.put("name", "1234");
-		obj2.put("address", "san jose");
-		obj2.put("time", "01/02/2017");
-
-		JSONArray array = new JSONArray();
-		array.put(obj1);
-		array.put(obj2);
-		RpcHelper.writeJsonArray(response, array);
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			response.setStatus(403);
+			return;
+		}
+		String userId = request.getParameter("user_id");
+		double lat = Double.parseDouble(request.getParameter("lat"));
+		double lon = Double.parseDouble(request.getParameter("lon"));
+		Recommendation recommendation = new Recommendation();
 	}
 
 	/**
