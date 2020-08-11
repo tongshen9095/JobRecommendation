@@ -54,7 +54,6 @@ public class recommendation {
 			}
 		}
 		return recomItems;
-		
 	}
 
 }
