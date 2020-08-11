@@ -42,7 +42,17 @@ public class recommendation {
 		// step5: search based on keywords and filter out favorited items
 		Set<String> visitedItemIds = new HashSet<>();
 		GitHubClient client = new GitHubClient();
-		
+		// {"software engineer": 6, "backend": 4, "san francisco": 3}
+		for (Entry<String, Integer> keyword : keywordList) {
+			List<Item> items = client.search(lat, lon, keyword.getKey());
+			for (Item item : items) {
+				String itemId = item.getItemId();
+				if (!favItemIds.contains(itemId) && !visitedItemIds.contains(itemId)) {
+					recomItems.add(item);
+					visitedItemIds.add(itemId);
+				}
+			}
+		}
 		return recomItems;
 		
 	}
