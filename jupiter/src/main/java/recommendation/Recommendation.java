@@ -13,7 +13,7 @@ import db.MySQLConnection;
 import entity.Item;
 import external.GitHubClient;
 
-public class recommendation {
+public class Recommendation {
 	
 	public List<Item> recommendItems(String userId, double lat, double lon) {
 		List<Item> recomItems = new ArrayList<>();
@@ -55,5 +55,4 @@ public class recommendation {
 		}
 		return recomItems;
 	}
-
 }
