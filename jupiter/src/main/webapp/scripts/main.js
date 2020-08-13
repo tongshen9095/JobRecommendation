@@ -130,6 +130,35 @@
 		document.querySelector('#register-result').innerHTML = '';
 	}
 
+	// login
+	function login() {
+		var username = document.querySelector('#username').value;
+		var password = document.querySelector('#password').value;
+		password = md5(username + md5(password));
+		// request parameters
+		var url = './login';
+		var req = JSON.stringify({
+			user_id : username,
+			password : password,
+		});
+		ajax('POST', url, req,
+		// sucCb
+		function(res) {
+			var result = JSON.parse(res);
+			if (result.status === 'OK') {
+				console.log('login successfully!');
+			}
+		},
+		// errCb
+		function() {
+			showLoginError();
+		});
+	}
+
+	function showLoginError() {
+		document.querySelector('#login-error').innerHTML = 'Invalid username or password';
+	}
+	
 	function ajax(method, url, data, successCallback, errorCallback) {
 		// step1: create XMLHttpRequest Object
 		var xhr = new XMLHttpRequest();
@@ -157,38 +186,6 @@
 					"application/json;charset=utf-8");
 			xhr.send(data);
 		}
-	}
-
-	// login
-	function login() {
-		var username = document.querySelector('#username').value;
-		var password = document.querySelector('#password').value;
-		password = md5(username + md5(password));
-
-		// request parameters
-		var url = './login';
-		var req = JSON.stringify({
-			user_id : username,
-			password : password,
-		});
-
-		ajax('POST', url, req,
-		// sucCb
-		function(res) {
-			var result = JSON.parse(res);
-			// successfully logged in
-			if (result.status === 'OK') {
-				console.log('login successfully!')
-			}
-		},
-		// errCb
-		function() {
-			showLoginError();
-		});
-	}
-
-	function showLoginError() {
-		document.querySelector('#login-error').innerHTML = 'Invalid username or password';
 	}
 
 	init();
