@@ -6,12 +6,14 @@
 	var lat = 37.38;
 	
 	function init() {
+		// register event listeners
 		document.querySelector('#login-form-btn').addEventListener('click',
 			onSessionInvalid);
 		document.querySelector('#register-form-btn').addEventListener('click',
 			showRegisterForm);
 		document.querySelector('#register-btn').addEventListener('click',
 				register);
+		document.querySelector('#login-btn').addEventListener('click', login);
 		validateSession();
 	}
 	
@@ -133,7 +135,7 @@
 		var xhr = new XMLHttpRequest();
 		// step2: set request parameters
 		xhr.open(method, url, true);
-		// step4: register function to handle response
+		// step4: register functions to handle response
 		// the function is called when the request is complete
 		xhr.onload = function() {
 			if (xhr.status === 200) {
@@ -155,6 +157,38 @@
 					"application/json;charset=utf-8");
 			xhr.send(data);
 		}
+	}
+
+	// login
+	function login() {
+		var username = document.querySelector('#username').value;
+		var password = document.querySelector('#password').value;
+		password = md5(username + md5(password));
+
+		// request parameters
+		var url = './login';
+		var req = JSON.stringify({
+			user_id : username,
+			password : password,
+		});
+
+		ajax('POST', url, req,
+		// sucCb
+		function(res) {
+			var result = JSON.parse(res);
+			// successfully logged in
+			if (result.status === 'OK') {
+				console.log('login successfully!')
+			}
+		},
+		// errCb
+		function() {
+			showLoginError();
+		});
+	}
+
+	function showLoginError() {
+		document.querySelector('#login-error').innerHTML = 'Invalid username or password';
 	}
 
 	init();
