@@ -133,6 +133,20 @@
 		var xhr = new XMLHttpRequest();
 		// step2: set request parameters
 		xhr.open(method, url, true);
+		// step4: register function to handle response
+		// the function is called when the request is complete
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+				successCallback(xhr.responseText);
+			} else {
+				errorCallback();
+			}
+		};
+		// when the request can't be made
+		xhr.onerror = function() {
+			console.error("The request couldn't be completed.");
+			errorCallback();
+		};
 		// step3: send request
 		if (data === null) {
 			xhr.send();
@@ -141,18 +155,6 @@
 					"application/json;charset=utf-8");
 			xhr.send(data);
 		}
-		// step4: handle response
-		xhr.onload = function() {
-			if (xhr.status === 200) {
-				successCallback(xhr.responseText);
-			} else {
-				errorCallback();
-			}
-		};
-		xhr.onerror = function() {
-			console.error("The request couldn't be completed.");
-			errorCallback();
-		};
 	}
 
 	init();
