@@ -7,6 +7,11 @@
 	
 	// step4: only show login info and hide the rest
 	function init() {
+		// add event listener
+		document.querySelector('#login-form-btn').addEventListener('click',
+			onSessionInvalid);
+		document.querySelector('#register-form-btn').addEventListener('click',
+			showRegisterForm);
 		validateSession();
 	}
 	function validateSession() {
