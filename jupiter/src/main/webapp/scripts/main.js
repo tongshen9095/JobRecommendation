@@ -12,7 +12,7 @@
 	function validateSession() {
 		onSessionInvalid();
 	}
-		function onSessionInvalid() {
+	function onSessionInvalid() {
 		var loginForm = document.querySelector('#login-form');
 		var registerForm = document.querySelector('#register-form');
 		var itemNav = document.querySelector('#item-nav');
