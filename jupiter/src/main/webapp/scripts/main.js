@@ -13,6 +13,12 @@
 		document.querySelector('#register-btn').addEventListener('click',
 				register);
 		document.querySelector('#login-btn').addEventListener('click', login);
+		document.querySelector('#nearby-btn').addEventListener('click',
+				loadNearbyItems);
+		document.querySelector('#fav-btn').addEventListener('click',
+				loadFavoriteItems);
+		document.querySelector('#recommend-btn').addEventListener('click',
+				loadRecommendedItems);
 		validateSession();
 	}
 	
@@ -432,6 +438,56 @@
 		}
 		);
 	}
+
+	// load favorite items
+	// [GET] /history?user_id=1111
+	function loadFavoriteItems() {
+		activeBtn('fav-btn');
+		// request parameters
+		var url = './history';
+		var params = 'user_id=' + user_id;
+		var req = JSON.stringify({});
+		// display loading message
+		showLoadingMessage('Loading favorite items...');
+		// get favorite items
+		ajax('GET', url + '?' + params, req, function(res) {
+			var items = JSON.parse(res);
+			if (!items || items.length === 0) {
+				showWarningMessage('No favorite item.');
+			} else {
+				listItems(items);
+			}
+		}, function() {
+			showErrorMessage('Cannot load favorite items.');
+		});
+	}
+	
+	// load recommended items
+	// [GET] /recommendation?user_id=1111
+	function loadRecommendedItems() {
+		activeBtn('recommend-btn');
+		// request parameters
+		var url = './recommendation' + '?' + 'user_id=' + user_id + '&lat='
+				+ lat + '&lon=' + lng;
+		var data = null;
+		// display loading message
+		showLoadingMessage('Loading recommended items...');
+		ajax('GET', url, data,
+		// sucCb
+		function(res) {
+			var items = JSON.parse(res);
+			if (!items || items.length === 0) {
+				showWarningMessage('No recommended item. Make sure you have favorites.');
+			} else {
+				listItems(items);
+			}
+		},
+		// err
+		function() {
+			showErrorMessage('Cannot load recommended items.');
+		});
+	}
+
 
 	init();
 	
