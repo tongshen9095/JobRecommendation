@@ -274,9 +274,8 @@
 		loadNearbyItems();
 	}
 	
-	/* step5: load nearby items
-	   [GET] /search?lat=37.38&lon=-122.08&user_id=1111
-	*/
+	// step5: load nearby items
+	// [GET] /search?lat=37.38&lon=-122.08&user_id=1111
 	function loadNearbyItems() {
 		console.log('loadNearbyItems');
 		activeBtn('nearby-btn');
@@ -413,10 +412,9 @@
 		itemList.appendChild(li);
 	}
 
-	/* step7: favorite / unfavorite an itme
-	   [POST / DELETE] .history
-       request body is an item object
-	*/
+	// step7: favorite / unfavorite an itme
+	// [POST / DELETE] .history
+    // request body is an item object
 	function changeFavoriteItem(item) {
 		// check whether this item has been visited or not
 		var li = document.querySelector('#item-' + item.item_id);
