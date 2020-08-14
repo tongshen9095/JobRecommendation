@@ -332,12 +332,106 @@
 		}
 		return element;
 	}
-
-
-
-
 	
+	function listItems(items) {
+		var itemList = document.querySelector('#item-list');
+		itemList.innerHTML = ''; // clear current results
 
+		for (var i = 0; i < items.length; i++) {
+			addItem(itemList, items[i]);
+		}
+	}
+
+	function addItem(itemList, item) {
+		var item_id = item.item_id;
+		// create the <li> tag and specify the id and class attributes
+		var li = $create('li', {
+			id : 'item-' + item_id,
+			className : 'item'
+		});
+		// set the data attribute ex. <li data-item_id="G5vYZ4kxGQVCR"
+		// data-favorite="true">
+		li.dataset.item_id = item_id;
+		li.dataset.favorite = item.favorite;
+		// item image
+		if (item.image_url) {
+			li.appendChild($create('img', {
+				src : item.image_url
+			}));
+		} else {
+			li.appendChild($create('img', {
+				src : 'https://via.placeholder.com/100'
+			}));
+		}
+		// section
+		var section = $create('div');
+		// title
+		var title = $create('a', {
+			className : 'item-name',
+			href : item.url,
+			target : '_blank'
+		});
+		title.innerHTML = item.name;
+		section.appendChild(title);
+		// keyword
+		var keyword = $create('p', {
+			className : 'item-keyword'
+		});
+		keyword.innerHTML = 'Keyword: ' + item.keywords.join(', ');
+		section.appendChild(keyword);
+		li.appendChild(section);
+		// address
+		var address = $create('p', {
+			className : 'item-address'
+		});
+		// ',' => '<br/>', '\"' => ''
+		address.innerHTML = item.address.replace(/,/g, '<br/>').replace(/\"/g,
+				'');
+		li.appendChild(address);
+		// favorite link
+		var favLink = $create('p', {
+			className : 'fav-link'
+		});
+		favLink.onclick = function() {
+			changeFavoriteItem(item);
+		};
+		favLink.appendChild($create('i', {
+			id : 'fav-icon-' + item_id,
+			className : item.favorite ? 'fa fa-heart' : 'fa fa-heart-o'
+		}));
+		li.appendChild(favLink);
+		itemList.appendChild(li);
+	}
+
+	function changeFavoriteItem(item) {
+		// check whether this item has been visited or not
+		var li = document.querySelector('#item-' + item.item_id);
+		var favIcon = document.querySelector('#fav-icon-' + item.item_id);
+		var favorite = !(li.dataset.favorite === 'true');
+
+		// request parameters
+		var url = './history';
+		var req = JSON.stringify({
+			user_id : user_id,
+			favorite : item
+		});
+		var method = favorite ? 'POST' : 'DELETE';
+
+		ajax(method, url, req,
+		// sucCb
+		function(res) {
+			var result = JSON.parse(res);
+			if (result.status === 'OK' || result.result === 'SUCCESS') {
+				li.dataset.favorite = favorite;
+				favIcon.className = favorite ? 'fa fa-heart' : 'fa fa-heart-o';
+			}
+		}, 
+		//errCb
+		function(){
+			console.log('change favorite failed!')
+		}
+		);
+	}
 
 	init();
 	
