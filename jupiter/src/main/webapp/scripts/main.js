@@ -81,15 +81,8 @@
 		document.querySelector('#register-result').innerHTML = '';
 	}
 	
-	/* step1: register
-	   [POST] ./register
-	  {
-       "user_id": "1111",
-       "password": "1111",
-       "first_name": "John",
-       "last_name": "Smith"
-        }
-    	*/
+	// step1: register
+	// [POST] ./register
 	function register() {
 		var username = document.querySelector('#register-username').value;
 		var password = document.querySelector('#register-password').value;
@@ -168,14 +161,8 @@
 		}
 	}
 	
-	/**
-	 * step2: login
-	 * [POST] ./login
-     * {
- 	 *  "user_id": "1111",
-	 *  "password": "1111"
-	 * } 
-	*/
+	// step2: login
+	// [POST] ./login
 	function login() {
 		var username = document.querySelector('#username').value;
 		var password = document.querySelector('#password').value;
@@ -204,9 +191,8 @@
 		document.querySelector('#login-error').innerHTML = 'Invalid username or password';
 	}
 	
-	/* step3: validate session
-	   [GET] ./login
-	*/
+	// step3: validate session
+	// [GET] ./login
 	function validateSession() {
 		onSessionInvalid();
 		// request parameters
