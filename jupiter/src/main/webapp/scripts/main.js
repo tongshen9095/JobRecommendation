@@ -171,8 +171,8 @@
 	/* step2: login
 	  [POST] ./login
        {
-  		"user_id": "1111",
-  		"password": "1111"
+ 		"user_id": "1111",
+		"password": "1111"
 		} 
 	*/
 	function login() {
