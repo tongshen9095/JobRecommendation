@@ -412,7 +412,7 @@
 		itemList.appendChild(li);
 	}
 
-	// step7: favorite / unfavorite an itme
+	// step7: favorite / unfavorite an item
 	// [POST / DELETE] .history
 	// request body is an item object
 	function changeFavoriteItem(item) {
