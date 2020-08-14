@@ -1,8 +1,8 @@
 (function() {
 	var user_id = "1111";
 	var user_fullname = "John";
-	var lng = -122.21;
-	var lat = 38.41;
+	var lng = -122.08;
+	var lat = 37.38;
 	
 	function init() {
 		// register event listeners
