@@ -122,8 +122,37 @@
 			showErrorMessage('Cannot load nearby items.');
 		});
 	}
-
 	
+	// helper function that make a navigation buttion active
+	function activeBtn(btnId) {
+		var btns = document.querySelectorAll('.main-nav-btn');
+		// deactivate all navigation buttons
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].className = btns[i].className.replace(/\bactive\b/, '');
+		}
+		// active the one that has id = btnId
+		var btn = document.querySelector('#' + btnId);
+		btn.className += ' active';
+	}
+
+	function showLoadingMessage(msg) {
+		var itemList = document.querySelector('#item-list');
+		itemList.innerHTML = '<p class="notice"><i class="fa fa-spinner fa-spin"></i> '
+				+ msg + '</p>';
+	}
+
+	function showWarningMessage(msg) {
+		var itemList = document.querySelector('#item-list');
+		itemList.innerHTML = '<p class="notice"><i class="fa fa-exclamation-triangle"></i> '
+				+ msg + '</p>';
+	}
+
+	function showErrorMessage(msg) {
+		var itemList = document.querySelector('#item-list');
+		itemList.innerHTML = '<p class="notice"><i class="fa fa-exclamation-circle"></i> '
+				+ msg + '</p>';
+	}
+
 	// only show login info
 	function onSessionInvalid() {
 		var loginForm = document.querySelector('#login-form');
