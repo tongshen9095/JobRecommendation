@@ -182,7 +182,8 @@
 	function showLoginError() {
 		document.querySelector('#login-error').innerHTML = 'Invalid username or password';
 	}
-
+	
+	// validate session
 	function validateSession() {
 		onSessionInvalid();
 		// request parameters
@@ -236,6 +237,7 @@
 		initGeoLocation();
 	}
 	
+	// add location info
 	function initGeoLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(onPositionUpdated,
@@ -263,6 +265,7 @@
 		loadNearbyItems();
 	}
 	
+	// load nearby items
 	function loadNearbyItems() {
 		console.log('loadNearbyItems');
 		activeBtn('nearby-btn');
@@ -319,6 +322,7 @@
 				+ msg + '</p>';
 	}
 	
+	// display items
 	function $create(tag, options) {
 		var element = document.createElement(tag);
 		for ( var key in options) {
