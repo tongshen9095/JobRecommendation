@@ -7,9 +7,9 @@
 	function init() {
 		// register event listeners
 		document.querySelector('#login-form-btn').addEventListener('click',
-			onSessionInvalid);
+				onSessionInvalid);
 		document.querySelector('#register-form-btn').addEventListener('click',
-			showRegisterForm);
+				showRegisterForm);
 		document.querySelector('#register-btn').addEventListener('click',
 				register);
 		document.querySelector('#login-btn').addEventListener('click', login);
