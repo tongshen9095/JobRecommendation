@@ -428,6 +428,7 @@
 
 	/* favorite / unfavorite an itme
 	   [POST / DELETE] .history
+       request body is an item object
 	*/
 	function changeFavoriteItem(item) {
 		// check whether this item has been visited or not
@@ -505,7 +506,6 @@
 			showErrorMessage('Cannot load recommended items.');
 		});
 	}
-
 
 	init();
 	
