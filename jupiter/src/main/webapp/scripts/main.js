@@ -81,7 +81,15 @@
 		document.querySelector('#register-result').innerHTML = '';
 	}
 	
-	// register
+	/* register
+	   [POST] ./register
+	  {
+       "user_id": "1111",
+       "password": "1111",
+       "first_name": "John",
+       "last_name": "Smith"
+        }
+    */
 	function register() {
 		var username = document.querySelector('#register-username').value;
 		var password = document.querySelector('#register-password').value;
@@ -160,7 +168,13 @@
 		}
 	}
 	
-	// login
+	/* login
+	  [POST] ./login
+       {
+  		"user_id": "1111",
+  		"password": "1111"
+		} 
+	*/
 	function login() {
 		var username = document.querySelector('#username').value;
 		var password = document.querySelector('#password').value;
@@ -189,7 +203,9 @@
 		document.querySelector('#login-error').innerHTML = 'Invalid username or password';
 	}
 	
-	// validate session
+	/* validate session
+	   [GET] ./login
+	*/
 	function validateSession() {
 		onSessionInvalid();
 		// request parameters
@@ -271,7 +287,9 @@
 		loadNearbyItems();
 	}
 	
-	// load nearby items
+	/* load nearby items
+	   [GET] /search?lat=37.38&lon=-122.08&user_id=1111
+	*/
 	function loadNearbyItems() {
 		console.log('loadNearbyItems');
 		activeBtn('nearby-btn');
@@ -281,7 +299,6 @@
 		var data = null;
 		// display loading message
 		showLoadingMessage('Loading nearby items...');
-		// search job by lat and lat
 		ajax('GET', url + '?' + params, data,
 		// sucCb
 		function(res) {
@@ -409,12 +426,14 @@
 		itemList.appendChild(li);
 	}
 
+	/* favorite / unfavorite an itme
+	   [POST / DELETE] .history
+	*/
 	function changeFavoriteItem(item) {
 		// check whether this item has been visited or not
 		var li = document.querySelector('#item-' + item.item_id);
 		var favIcon = document.querySelector('#fav-icon-' + item.item_id);
 		var favorite = !(li.dataset.favorite === 'true');
-
 		// request parameters
 		var url = './history';
 		var req = JSON.stringify({
@@ -422,7 +441,6 @@
 			favorite : item
 		});
 		var method = favorite ? 'POST' : 'DELETE';
-
 		ajax(method, url, req,
 		// sucCb
 		function(res) {
