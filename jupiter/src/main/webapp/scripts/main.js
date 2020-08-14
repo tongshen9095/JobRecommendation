@@ -168,12 +168,13 @@
 		}
 	}
 	
-	/* step2: login
-	  [POST] ./login
-       {
- 		"user_id": "1111",
-		"password": "1111"
-		} 
+	/**
+	 * step2: login
+	 * [POST] ./login
+     * {
+ 	 *  "user_id": "1111",
+	 *  "password": "1111"
+	 * } 
 	*/
 	function login() {
 		var username = document.querySelector('#username').value;
