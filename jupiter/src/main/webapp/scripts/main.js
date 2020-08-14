@@ -87,12 +87,42 @@
 		lng = position.coords.longitude;
 		console.log('lat -> ', lat);
 		console.log('lng -> ', lng);
+		loadNearbyItems();
 	}
 
 	function onLoadPositionFailed() {
-		console.warn('navigator.geolocation is not available');
-		getLocationFromIP();
+		console.warn('navigator.geolocation is not available; use default location');
+		console.log('lat -> ', lat);
+		console.log('lng -> ', lng);
+		loadNearbyItems();
 	}
+	
+	function loadNearbyItems() {
+		console.log('loadNearbyItems');
+		activeBtn('nearby-btn');
+		// request parameters
+		var url = './search';
+		var params = 'user_id=' + user_id + '&lat=' + lat + '&lon=' + lng;
+		var data = null;
+		// display loading message
+		showLoadingMessage('Loading nearby items...');
+		// search job by lat and lat
+		ajax('GET', url + '?' + params, data,
+		// sucCb
+		function(res) {
+			var items = JSON.parse(res);
+			if (!items || items.length === 0) {
+				showWarningMessage('No nearby item.');
+			} else {
+				console.log(items);
+			}
+		},
+		// errCb
+		function() {
+			showErrorMessage('Cannot load nearby items.');
+		});
+	}
+
 	
 	// only show login info
 	function onSessionInvalid() {
