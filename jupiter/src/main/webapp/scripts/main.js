@@ -66,8 +66,34 @@
 		showElement(logoutBtn, 'inline-block');
 		hideElement(loginForm);
 		hideElement(registerForm);
+		
+		initGeoLocation();
+	}
+	
+	function initGeoLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(onPositionUpdated,
+					onLoadPositionFailed, {
+						maximumAge : 60000
+					});
+			showLoadingMessage('Retrieving your location...');
+		} else {
+			onLoadPositionFailed();
+		}
+	}
+	
+	function onPositionUpdated(position) {
+		lat = position.coords.latitude;
+		lng = position.coords.longitude;
+		console.log('lat -> ', lat);
+		console.log('lng -> ', lng);
 	}
 
+	function onLoadPositionFailed() {
+		console.warn('navigator.geolocation is not available');
+		getLocationFromIP();
+	}
+	
 	// only show login info
 	function onSessionInvalid() {
 		var loginForm = document.querySelector('#login-form');
