@@ -81,7 +81,7 @@
 		document.querySelector('#register-result').innerHTML = '';
 	}
 	
-	/* register
+	/* step1: register
 	   [POST] ./register
 	  {
        "user_id": "1111",
@@ -168,7 +168,7 @@
 		}
 	}
 	
-	/* login
+	/* step2: login
 	  [POST] ./login
        {
   		"user_id": "1111",
@@ -203,7 +203,7 @@
 		document.querySelector('#login-error').innerHTML = 'Invalid username or password';
 	}
 	
-	/* validate session
+	/* step3: validate session
 	   [GET] ./login
 	*/
 	function validateSession() {
@@ -259,7 +259,7 @@
 		initGeoLocation();
 	}
 	
-	// add location info
+	// step4: add location info
 	function initGeoLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(onPositionUpdated,
@@ -287,7 +287,7 @@
 		loadNearbyItems();
 	}
 	
-	/* load nearby items
+	/* step5: load nearby items
 	   [GET] /search?lat=37.38&lon=-122.08&user_id=1111
 	*/
 	function loadNearbyItems() {
@@ -345,7 +345,7 @@
 				+ msg + '</p>';
 	}
 	
-	// display items
+	// step6: display items
 	function $create(tag, options) {
 		var element = document.createElement(tag);
 		for ( var key in options) {
@@ -426,7 +426,7 @@
 		itemList.appendChild(li);
 	}
 
-	/* favorite / unfavorite an itme
+	/* step7: favorite / unfavorite an itme
 	   [POST / DELETE] .history
        request body is an item object
 	*/
@@ -458,7 +458,7 @@
 		);
 	}
 
-	// load favorite items
+	// step8: load favorite items
 	// [GET] /history?user_id=1111
 	function loadFavoriteItems() {
 		activeBtn('fav-btn');
@@ -481,7 +481,7 @@
 		});
 	}
 	
-	// load recommended items
+	// step9: load recommended items
 	// [GET] /recommendation?user_id=1111
 	function loadRecommendedItems() {
 		activeBtn('recommend-btn');
