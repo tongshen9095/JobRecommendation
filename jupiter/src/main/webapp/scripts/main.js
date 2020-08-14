@@ -3,7 +3,7 @@
 	var user_fullname = "John";
 	var lng = -122.08;
 	var lat = 37.38;
-	
+		
 	function init() {
 		// register event listeners
 		document.querySelector('#login-form-btn').addEventListener('click',
