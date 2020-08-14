@@ -89,7 +89,7 @@
        "first_name": "John",
        "last_name": "Smith"
         }
-    */
+    	*/
 	function register() {
 		var username = document.querySelector('#register-username').value;
 		var password = document.querySelector('#register-password').value;
