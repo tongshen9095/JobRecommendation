@@ -19,8 +19,55 @@
 	
 	function validateSession() {
 		onSessionInvalid();
+		// request parameters
+		var url = './login';
+		var req = JSON.stringify({});
+		// display loading message
+		showLoadingMessage('Validating session...');
+		// use login GET method to valid the session
+		ajax('GET', url, req,
+		// sucCb
+		function(res) {
+			var result = JSON.parse(res);
+			if (result.status === 'ok') {
+				onSessionValid(result);
+			}
+		}, 
+		// errCb
+		function() {
+			console.log('login error')
+		});
 	}
 	
+	function showLoadingMessage(msg) {
+		var itemList = document.querySelector('#item-list');
+		itemList.innerHTML = '<p class="notice"><i class="fa fa-spinner fa-spin"></i> '
+				+ msg + '</p>';
+	}
+ 
+	function onSessionValid(result) {
+		user_id = result.user_id;
+		user_fullname = result.name;
+
+		var loginForm = document.querySelector('#login-form');
+		var registerForm = document.querySelector('#register-form');
+		var itemNav = document.querySelector('#item-nav');
+		var itemList = document.querySelector('#item-list');
+		var avatar = document.querySelector('#avatar');
+		var welcomeMsg = document.querySelector('#welcome-msg');
+		var logoutBtn = document.querySelector('#logout-link');
+
+		welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
+
+		showElement(itemNav);
+		showElement(itemList);
+		showElement(avatar);
+		showElement(welcomeMsg);
+		showElement(logoutBtn, 'inline-block');
+		hideElement(loginForm);
+		hideElement(registerForm);
+	}
+
 	// only show login info
 	function onSessionInvalid() {
 		var loginForm = document.querySelector('#login-form');
@@ -110,7 +157,7 @@
 		// sucCb
 		function(res) {
 			var result = JSON.parse(res);
-			if (result.status === 'OK') {
+			if (result.status === 'ok') {
 				showRegisterResult('Succesfully registered');
 			} else {
 				showRegisterResult('User already existed');
@@ -145,7 +192,7 @@
 		// sucCb
 		function(res) {
 			var result = JSON.parse(res);
-			if (result.status === 'OK') {
+			if (result.status === 'ok') {
 				console.log('login successfully!');
 			}
 		},
