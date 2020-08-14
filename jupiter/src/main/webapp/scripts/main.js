@@ -414,7 +414,7 @@
 
 	// step7: favorite / unfavorite an itme
 	// [POST / DELETE] .history
-    // request body is an item object
+	// request body is an item object
 	function changeFavoriteItem(item) {
 		// check whether this item has been visited or not
 		var li = document.querySelector('#item-' + item.item_id);
