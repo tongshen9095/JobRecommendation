@@ -70,7 +70,7 @@ public class ItemHistory extends HttpServlet {
 		Item item = RpcHelper.parseFavoriteItem(input.getJSONObject("favorite"));
 		conn.setFavoriteItems(userId, item);
 		conn.close();
-		RpcHelper.writeJsonObject(response, new JSONObject().put("result", "success"));
+		RpcHelper.writeJsonObject(response, new JSONObject().put("result", "SUCCESS"));
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class ItemHistory extends HttpServlet {
 		String itemId = input.getJSONObject("favorite").getString("item_id");
 		conn.unsetFavoriteItems(userId, itemId);
 		conn.close();
-		RpcHelper.writeJsonObject(response, new JSONObject().put("result", "success"));
+		RpcHelper.writeJsonObject(response, new JSONObject().put("result", "SUCCESS"));
 	}
 
 }
