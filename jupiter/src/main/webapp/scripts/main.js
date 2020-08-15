@@ -45,6 +45,11 @@
 	}
 	
 	function clearRegisterResult() {
+		// clear the form when reopening the form
+		document.querySelector('#register-username').value = '';
+		document.querySelector('#register-password').value = '';
+		document.querySelector('#register-first-name').value = '';
+		document.querySelector('#register-last-name').value = '';
 		document.querySelector('#register-result').innerHTML = '';
 	}
 	
