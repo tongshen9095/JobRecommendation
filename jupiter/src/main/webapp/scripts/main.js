@@ -112,7 +112,7 @@
 		// sucCb
 		function(res) {
 			var result = JSON.parse(res);
-			if (result.status === 'ok') {
+			if (result.status === 'OK') {
 				showRegisterResult('Succesfully registered');
 			} else {
 				showRegisterResult('User already existed');
