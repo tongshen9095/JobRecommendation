@@ -22,40 +22,7 @@
 		validateSession();
 	}
 	
-	// only show login info
-	function onSessionInvalid() {
-		var loginForm = document.querySelector('#login-form');
-		var registerForm = document.querySelector('#register-form');
-		var itemNav = document.querySelector('#item-nav');
-		var itemList = document.querySelector('#item-list');
-		var avatar = document.querySelector('#avatar');
-		var welcomeMsg = document.querySelector('#welcome-msg');
-		var logoutBtn = document.querySelector('#logout-link');
-
-		hideElement(itemNav);
-		hideElement(itemList);
-		hideElement(avatar);
-		hideElement(logoutBtn);
-		hideElement(welcomeMsg);
-		hideElement(registerForm);
-
-		clearLoginError();
-		showElement(loginForm);
-	}
-	
-	function hideElement(element) {
-		element.style.display = 'none';
-	}
-	
-	function clearLoginError() {
-		document.querySelector('#login-error').innerHTML = '';
-	}
-	
-	function showElement(element, style) {
-		var displayStyle = style ? style : 'block';
-		element.style.display = displayStyle;
-	}
-	
+	// step1: register
 	// only show register form
 	function showRegisterForm() {
 		var loginForm = document.querySelector('#login-form');
@@ -76,12 +43,16 @@
 		clearRegisterResult();
 		showElement(registerForm);
 	}
-
+	
 	function clearRegisterResult() {
+		// clear the form when reopening the form
+		document.querySelector('#register-username').value = '';
+		document.querySelector('#register-password').value = '';
+		document.querySelector('#register-first-name').value = '';
+		document.querySelector('#register-last-name').value = '';
 		document.querySelector('#register-result').innerHTML = '';
 	}
 	
-	// step1: register
 	// [POST] ./register
 	function register() {
 		var username = document.querySelector('#register-username').value;
@@ -127,10 +98,6 @@
 	function showRegisterResult(registerMessage) {
 		document.querySelector('#register-result').innerHTML = registerMessage;
 	}
-
-	function clearRegisterResult() {
-		document.querySelector('#register-result').innerHTML = '';
-	}
 	
 	function ajax(method, url, data, successCallback, errorCallback) {
 		// step1: create XMLHttpRequest Object
@@ -162,6 +129,40 @@
 	}
 	
 	// step2: login
+	// only show login info
+	function onSessionInvalid() {
+		var loginForm = document.querySelector('#login-form');
+		var registerForm = document.querySelector('#register-form');
+		var itemNav = document.querySelector('#item-nav');
+		var itemList = document.querySelector('#item-list');
+		var avatar = document.querySelector('#avatar');
+		var welcomeMsg = document.querySelector('#welcome-msg');
+		var logoutBtn = document.querySelector('#logout-link');
+
+		hideElement(itemNav);
+		hideElement(itemList);
+		hideElement(avatar);
+		hideElement(logoutBtn);
+		hideElement(welcomeMsg);
+		hideElement(registerForm);
+
+		clearLoginError();
+		showElement(loginForm);
+	}
+	
+	function hideElement(element) {
+		element.style.display = 'none';
+	}
+	
+	function clearLoginError() {
+		document.querySelector('#login-error').innerHTML = '';
+	}
+	
+	function showElement(element, style) {
+		var displayStyle = style ? style : 'block';
+		element.style.display = displayStyle;
+	}
+	
 	// [POST] ./login
 	function login() {
 		var username = document.querySelector('#username').value;
@@ -177,8 +178,8 @@
 		// sucCb
 		function(res) {
 			var result = JSON.parse(res);
-			if (result.status === 'ok') {
-				console.log('login successfully!');
+			if (result.status === 'OK') {
+				onSessionValid(result);
 			}
 		},
 		// errCb
@@ -205,13 +206,13 @@
 		// sucCb
 		function(res) {
 			var result = JSON.parse(res);
-			if (result.status === 'ok') {
+			if (result.status === 'OK') {
 				onSessionValid(result);
 			}
 		}, 
 		// errCb
 		function() {
-			console.log('login error')
+			console.log('login error');
 		});
 	}
 	

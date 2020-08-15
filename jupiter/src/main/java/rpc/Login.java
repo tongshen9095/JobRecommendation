@@ -62,7 +62,7 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			// store use_id into the session
 			session.setAttribute("user_id", userId);
-			obj.put("status", "ok")
+			obj.put("status", "OK")
 			.put("user_id", userId)
 			.put("name", conn.getFullname(userId));	
 		}
