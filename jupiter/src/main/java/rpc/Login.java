@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
 		if (session != null) {
 			MySQLConnection conn = new MySQLConnection();
 			String userId = session.getAttribute("user_id").toString();
-			obj.put("status", "ok")
+			obj.put("status", "OK")
 			.put("user_id", userId)
 			.put("name", conn.getFullname(userId));	
 			conn.close();
