@@ -3,6 +3,6 @@
 ## [Project Demo](https://drive.google.com/file/d/19m4KbNGfyMGQEl9sqUKr90rtYFp4q6-h/view?usp=sharing)
 
 
-The project built an AWS based web service which allow users to search and apply positions. I also used users' favorite record to provide personalized job recommendation. 
+The project built an AWS based web service which allow users to search and apply positions. The project also provideds personalized job recommendation using users' favorite records.
 
-Click [here](http://3.17.184.15/jupiter/) to visit the job recommendation website or enter http://3.17.184.15/jupiter/ in the browser.
+The project is deployed on Amazon E2C. Click [here](http://3.17.184.15/jupiter/) to visit the job recommendation website or enter http://3.17.184.15/jupiter/ in the browser.
