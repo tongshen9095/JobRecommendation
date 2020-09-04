@@ -7,4 +7,4 @@ The project built an AWS based web service which allow users to search and apply
 
 The project is deployed on Amazon E2C. Click [here](http://3.17.184.15/jupiter/) to visit the job recommendation website or enter http://3.17.184.15/jupiter/ in the browser.
 
-<img src=./figures/interface.png width="750"/>
+<img src=./figures/interface.png width="500"/>
